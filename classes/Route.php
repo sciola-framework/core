@@ -2,7 +2,7 @@
 /**
  * Route
  *
- * @version 1.0.8
+ * @version 1.0.9
  */
 namespace Sciola;
 
@@ -96,7 +96,7 @@ class Route
         $data['message'] = self::$errors[$code][1];
         $data['request'] = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         header('HTTP/1.0 ' . $data['title']);
-        return view('@sciola/error', $data);
+        return view('@packages/sciola/templates/error', $data);
     }
 
    /**
