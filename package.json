@@ -10,7 +10,7 @@
   },
   "public": {
     "axios": "axios/dist",
-    "bootbox": "bootbox/dist",
+    "bootbox": "bootbox.v5/dist",
     "bootstrap": "bootstrap/dist",
     "fontawesome": "@fortawesome/fontawesome-free",
     "jquery": "jquery/dist",
