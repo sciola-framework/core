@@ -1,4 +1,6 @@
 #!/bin/bash
+# debian@debian:~$ bash status.sh 3000 --online
+# debian@debian:~$ bash status.sh 3000 --offline
 clear
 space=""
 spacing() {
