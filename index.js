@@ -1,34 +1,28 @@
 function sciola () {
+console.log("Under development!");
+const main = function () {
 
-(function () {
-
-
-
-try {
-    module.exports = {
-        sciola: require("./node_modules/sciola")
-    };
-} catch (error) {
-    module.exports = {
-        sciola: () => {
-            if (error.code === "MODULE_NOT_FOUND") {
-                console.clear();
-                console.log("Installing packages...");
-                /*const exec = require("child_process").exec;
-                exec("npm install sciola", {
-                        cwd: __dirname
-                    }, (error, stdout, stderr) => {
+    try {
+        module.exports = {
+            sciola: require("./node_modules/sciola")
+        };
+    } catch (error) {
+        module.exports = {
+            sciola: () => {
+                if (error.code === "MODULE_NOT_FOUND") {
                     console.clear();
-                    console.log(stdout);
-                });*/
+                    console.log("Installing packages...");
+                    /*const exec = require("child_process").exec;
+                    exec("npm install sciola", {
+                            cwd: __dirname
+                        }, (error, stdout, stderr) => {
+                        console.clear();
+                        console.log(stdout);
+                    });*/
+                }
             }
-        }
-    };
-}
-
-
-
-
+        };
+    }
 
     /*
     | --------------------------------------------------------------------------
@@ -439,6 +433,8 @@ try {
           url: req.originalUrl
         });
     });
-})();
+};
 
 }
+
+module.exports = {init:sciola};
