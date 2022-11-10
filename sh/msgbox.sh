@@ -1,4 +1,5 @@
 #!/bin/bash
+# debian@debian:~$ bash msgbox.sh "Message..." --info
 clear
 space=""
 declare -A color
