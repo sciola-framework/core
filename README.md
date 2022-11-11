@@ -34,7 +34,7 @@
 
 ## Reference
 
-https://github.com/sciola-framework/Sciola/blob/main/README.md#reference
+https://github.com/sciola-framework/sciola/blob/main/README.md#reference
 
 <br>
 
