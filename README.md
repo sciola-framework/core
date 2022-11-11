@@ -32,4 +32,14 @@
 
 <br>
 
-## [Reference](https://github.com/sciola-framework/Sciola/blob/main/README.md#reference)
+## Reference
+
+https://github.com/sciola-framework/Sciola/blob/main/README.md#reference
+
+<br>
+
+## License
+
+The Sciola framework is open-sourced software licensed under the [MIT license](LICENSE.md).
+
+Author: [Leandro Sciola](https://sciola-git.github.io/leandro-sciola)
