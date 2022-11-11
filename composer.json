@@ -1,0 +1,16 @@
+{
+    "name": "sciola/vendor",
+    "require": {
+        "twig/twig": "^3.4",
+        "catfan/medoo": "^2.1",
+        "erusev/parsedown": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sciola\\": "./classes/",
+            "Layers\\Controllers\\": "../../../layers/Controllers/",
+            "Layers\\Models\\": "../../../layers/Models/",
+            "Lib\\": "../../../libraries/"
+        }
+    }
+}
