@@ -1,29 +1,6 @@
 function sciola () {
 console.log("Under development!");
 const main = function () {
-
-    try {
-        module.exports = {
-            sciola: require("./node_modules/sciola")
-        };
-    } catch (error) {
-        module.exports = {
-            sciola: () => {
-                if (error.code === "MODULE_NOT_FOUND") {
-                    console.clear();
-                    console.log("Installing packages...");
-                    /*const exec = require("child_process").exec;
-                    exec("npm install sciola", {
-                            cwd: __dirname
-                        }, (error, stdout, stderr) => {
-                        console.clear();
-                        console.log(stdout);
-                    });*/
-                }
-            }
-        };
-    }
-
     /*
     | --------------------------------------------------------------------------
     | Console message
@@ -437,4 +414,14 @@ const main = function () {
 
 }
 
-module.exports = {init:sciola};
+//module.exports = {init:sciola};
+
+const version = require('./lib/version')();
+const manager = require('./lib/downloadManager');
+const execute = require('./lib/execute');
+
+module.exports = {
+  version,
+  manager,
+  execute,
+};
