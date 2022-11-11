@@ -15,7 +15,7 @@
 
 ### :arrow_right: Installation
 
-1. [Download the framework here and unzip it in your development directory.](https://github.com/sciola-git/Sciola/archive/refs/heads/main.zip)
+1. [Download the framework here and unzip it in your development directory.](https://github.com/sciola-git/sciola/archive/refs/heads/main.zip)
 
    Example: **/var/www/sciola**
 
