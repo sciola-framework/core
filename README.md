@@ -1,47 +1,9 @@
-<br>
-
 <p align="center"><a href="https://sciola-framework.github.io"><img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/brands/sciola_framework.animated.svg" width="100%"></a></p>
+<div align="center">
 
-# <p align="center">:warning: Under development</p>
+## [Documentation](https://sciola-framework.github.io/#doc)
 
-<br>
-
-### :arrow_right: Requirements
-
-- Apache2 ==> https://httpd.apache.org
-- Node.js ===> https://nodejs.org
-- PHP 7++ ==> https://www.php.net
-- DBMS ====> https://en.wikipedia.org/wiki/Database
-
-<br>
-
-### :arrow_right: Installation
-
-1. [Download the framework here and unzip it in your development directory.](https://github.com/sciola-git/sciola/archive/refs/heads/main.zip)
-
-   Example: **/var/www/sciola**
-
-2. Go to the packages directory and run the following command to install:
-
-   > **LINUX**
-   >
-   > debian@debian:~$ **node /var/www/sciola/packages/install**
-   >
-
-3. Give write permission to the directory: **/var/www/sciola/writable**
-
-4. Access the application through the url that is configured on your web server. Example: http://localhost
-
-<br>
-
-## Reference
-
-https://github.com/sciola-framework/sciola/blob/main/README.md#reference
-
-<br>
-
-## License
-
-The Sciola framework is open-sourced software licensed under the [MIT license](LICENSE.md).
-
-Author: [Leandro Sciola](https://sciola-framework.github.io/leandro-sciola)
+  <p align="center">The Sciola Framework provides a variety of features for building applications.</p>
+  <h6>The Sciola framework is open-sourced software licensed under the <a href="https://github.com/sciola-framework/sciola/blob/main/LICENSE.md">MIT license.</a></h6>
+  <h6>Author: <a href="https://github.com/Leandro-Sciola">Leandro Sciola</a></h6>
+</div>
