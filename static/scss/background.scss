@@ -1,0 +1,49 @@
+.bg-image-fixed {
+  background-attachment: fixed !important;
+}
+
+.bg-image-left {
+  background-position: left !important;
+}
+
+.bg-image-center,
+.icon {
+  background-position: center !important;
+}
+
+.bg-image-right {
+  background-position: right !important;
+}
+
+.bg-image-repeat {
+  background-repeat: repeat !important;
+}
+
+.bg-image-repeat-x {
+  background-repeat: repeat-x !important;
+}
+
+.bg-image-repeat-y {
+  background-repeat: repeat-y !important;
+}
+
+.bg-image-no-repeat,
+.icon {
+  background-repeat: no-repeat !important;
+}
+
+.bg-image-cover,
+.icon {
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+.btn-white {
+  background: linear-gradient(0deg, #ededed 0%, #fefefe 100%) !important;
+}
+
+.btn-white:hover {
+  background: linear-gradient(0deg, #fefefe 0%, #ededed 100%) !important;
+}

@@ -1,0 +1,31 @@
+nav a,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.outline-none {
+  outline: none !important;
+}
+
+.box-shadow-none {
+  box-shadow: none !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.decoration-none:hover,
+.decoration-none:active,
+.decoration-none:focus {
+  text-decoration: none !important;
+}
+
+.decoration-underline:hover,
+.decoration-underline:active,
+.decoration-underline:focus {
+  text-decoration: underline !important;
+}
