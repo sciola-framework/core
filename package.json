@@ -21,6 +21,7 @@
     "axios": "^1.1.3",
     "bootbox.v5": "^6.0.1",
     "bootstrap": "^5.2.2",
+    "decompress": "^4.2.1",
     "jquery": "^3.6.1",
     "minimist": "^1.2.7"
   },
@@ -42,9 +43,10 @@
     "composer": "2.4.4"
   },
   "bin": {
-    "sciola-framework": "./bin/sciola-framework.js"
+    "sciola": "./bin/sciola.js"
   },
   "scripts": {
+    "postinstall": "node ./bin/composer.js install",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
