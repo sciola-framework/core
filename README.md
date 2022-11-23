@@ -2,6 +2,11 @@
 <div align="center">
 <div align="left">
   <h1>Installation</h1>
+  <p>There are two ways to install the Sciola Framework:</p>
+  <p>This first installation method is recommended.</p>
+  <p>debian@debian:~$ <strong>npx sciola install</strong></p>
+  <hr>
+  <p>Or this other way:</p>
   <p>1. <a href="https://github.com/sciola-framework/sciola/archive/refs/heads/main.zip">Download the framework here and unzip it in your development directory.</a></p>
   <p>Example: <strong>/var/www/sciola</strong></p>
   <p>2. Go to the packages directory and run the following command to install:</p>
