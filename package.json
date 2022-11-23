@@ -2,8 +2,9 @@
   "name": "sciola",
   "version": "1.0.0",
   "description": "The Lightweight PHP Framework to Accelerate Development.",
-  "author": "Leandro Sciola <leandrosciola@gmail.com> (https://sciola-framework.github.io/)",
+  "author": "Leandro Sciola <leandrosciola@gmail.com> (https://sciola-framework.github.io)",
   "license": "MIT",
+  "homepage": "https://sciola-framework.github.io",
   "keywords": [
     "framework",
     "fullstack",
