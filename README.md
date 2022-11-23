@@ -17,6 +17,7 @@
   <p>4. Access the application through the url that is configured on your web server. Example: <a href="http://localhost">http://localhost</a></p>
 </div>
 <div align="center">
+
 ## [Documentation](https://sciola-framework.github.io/doc)
 
   <h6>The Sciola framework is open-sourced software licensed under the <a href="https://github.com/sciola-framework/sciola/blob/main/LICENSE.md">MIT license.</a></h6>
