@@ -1,6 +1,6 @@
 {
   "name": "sciola",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Lightweight PHP Framework to Accelerate Development.",
   "author": "Leandro Sciola <leandrosciola@gmail.com> (https://sciola-framework.github.io)",
   "license": "MIT",
