@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.0.8
+ * @version 1.0.9
  */
 namespace Sciola;
 
@@ -29,7 +29,7 @@ class Settings
             error_reporting(0);
             ini_set('display_errors', '0');
         }
-        require_once(PATH . '/packages/sciola/wrappers.php');
+        require_once(PATH . '/packages/node_modules/sciola/wrappers.php');
         Language::init();
         Template::init();
         Route::init();
