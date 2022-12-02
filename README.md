@@ -25,4 +25,7 @@
 
   <h6>The Sciola framework is open-sourced software licensed under the <a href="https://github.com/sciola-framework/sciola/blob/main/LICENSE.md">MIT license.</a></h6>
   <h6>Author: <a href="https://github.com/Leandro-Sciola">Leandro Sciola</a></h6>
+  <a href="https://www.paypal.com/donate/?hosted_button_id=N2HMD3ZGLQP44">
+    <img src="images/paypal.png" width="140px">
+  </a>
 </div>
