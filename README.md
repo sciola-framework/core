@@ -28,4 +28,7 @@
   <a href="https://www.paypal.com/donate/?hosted_button_id=T78XMWFQVHUQA">
     <img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/paypal.png" width="150px">
   </a>
+  <a href="https://github.com/sponsors/Leandro-Sciola">
+    <img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/sponsor.png" width="135px">
+  </a>
 </div>
