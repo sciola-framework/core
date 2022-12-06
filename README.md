@@ -32,6 +32,6 @@
     <img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/paypal.png" width="150px">
   </a>
   <a href="https://github.com/sponsors/Leandro-Sciola">
-    <img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/sponsor.png" width="150px">
+    <img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/sponsor.png" width="140px">
   </a>
 </div>
