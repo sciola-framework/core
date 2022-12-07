@@ -2,7 +2,7 @@
 /**
  * Connection
  *
- * @version 1.0.1
+ * @version 1.0.2
  */
 namespace Sciola;
 
@@ -82,13 +82,20 @@ class Connection
                              ';port=' . $config['port'] .
                              ';dbname=' . $config['database'] . $charset;
         } elseif ($interface === 'orm') {
-            $config = [
-              'database_type' => $config['driver'],
-	          'server'        => $config['host'],
-	          'database_name' => $config['database'],
-	          'username'      => $config['username'],
-	          'password'      => $config['password']
-            ];
+            if (strtolower($config['driver']) === 'sqlite') {
+                $config = [
+                  'type'     => 'sqlite',
+                  'database' => PATH . '/writable/sqlite/' . $config['database']
+                ];
+            } else {
+                $config = [
+                  'database_type' => $config['driver'],
+	              'server'        => $config['host'],
+	              'database_name' => $config['database'],
+	              'username'      => $config['username'],
+	              'password'      => $config['password']
+                ];
+            }
         }
         return $config;
     }
