@@ -17,7 +17,9 @@
   > **_NOTE:_** Give write permission to the directory: /var/www/sciola/**writable**
 
   <hr>
-  <p>Access the application through the url that is configured on your web server. Example: <a href="http://localhost">http://localhost</a></p>
+  <h5>Built-in web server</h5>
+  <p>debian@debian:~$ <strong>php -S localhost:8000 -t sciola/public sciola/public/index.php</strong></p>
+  <p>Access the application through the configured url. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
 <div align="center">
 
@@ -27,7 +29,4 @@
   <h6>Author: <a href="https://github.com/Leandro-Sciola">Leandro Sciola</a></h6>
   <br>
   <a href="https://www.paypal.com/donate/?hosted_button_id=T78XMWFQVHUQA"><img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/paypal.png" width="120px"></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/sponsors/Leandro-Sciola"><img src="https://raw.githubusercontent.com/sciola-framework/sciola-framework.github.io/main/images/buttons/sponsor.png" width="110px"></a>
-  <h5>Built-in web server</h5>
-  <p>debian@debian:~$ <strong>php -S localhost:8000 -t sciola/public sciola/public/index.php</strong></p>
-  <p>Access the application through the configured url. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
