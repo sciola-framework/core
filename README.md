@@ -17,7 +17,7 @@
   > **_NOTE:_** Give write permission to the directory: /var/www/sciola/**writable**
 
   <hr>
-  <h5>Built-in web server</h5>
+  <h4>Built-in web server</h4>
   <p>debian@debian:~$ <strong>php -S localhost:8000 -t sciola/public sciola/public/index.php</strong></p>
   <p>Access the application through the configured url. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
