@@ -2,7 +2,7 @@
 /**
  * Language
  *
- * @version 1.0.6
+ * @version 1.0.7
  */
 namespace Sciola;
 
@@ -32,6 +32,28 @@ class Language
     }
 
     /**
+     * getContent
+     *
+     * @param string $path
+     * @return array
+     * @access private
+     */
+    private static function getContent($path) : array
+    {
+        $arr['en']   = [];
+        $arr['lang'] = [];
+        $dir         = $path . '/languages/en/*.json';
+        foreach (glob($dir) as $file) {
+            $arr['en'] += json_decode(file_get_contents($file), true);
+        }
+        $dir = $path . '/languages/' . Settings::language() . '/*.json';
+        foreach (glob($dir) as $file) {
+            $arr['lang'] += json_decode(file_get_contents($file), true);
+        }
+        return $arr;
+    }
+
+    /**
      * generate
      *
      * @param string $file
@@ -41,16 +63,12 @@ class Language
     private static function generate($file) : void
     {
         $data        = [];
-        $arr['en']   = [];
-        $arr['lang'] = [];
-        $dir = PATH . '/languages/en/*.json';
-        foreach (glob($dir) as $_file) {
-            $arr['en'] += json_decode(file_get_contents($_file), true);
-        }
-        $dir = PATH . '/languages/' . Settings::language() . '/*.json';
-        foreach (glob($dir) as $_file) {
-            $arr['lang'] += json_decode(file_get_contents($_file), true);
-        }
+        $arr         = [];
+        $arr_sys     = self::getContent(dirname(__DIR__));
+        $arr_app     = self::getContent(PATH);
+        $arr['en']   = array_merge($arr_app['en'], $arr_sys['en']);
+        $arr['lang'] = array_merge($arr_app['lang'], $arr_sys['lang']);
+
         foreach ($arr['lang'] as $key => $value) {
             if (isset($arr['en'][$key])) {
                 $data[$arr['en'][$key]] = $value;
