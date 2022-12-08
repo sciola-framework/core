@@ -66,8 +66,8 @@ class Language
         $arr         = [];
         $arr_sys     = self::getContent(dirname(__DIR__));
         $arr_app     = self::getContent(PATH);
-        $arr['en']   = array_merge($arr_app['en'], $arr_sys['en']);
-        $arr['lang'] = array_merge($arr_app['lang'], $arr_sys['lang']);
+        $arr['en']   = array_merge($arr_sys['en'], $arr_app['en']);
+        $arr['lang'] = array_merge($arr_sys['lang'], $arr_app['lang']);
 
         foreach ($arr['lang'] as $key => $value) {
             if (isset($arr['en'][$key])) {
