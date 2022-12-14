@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.0.9
+ * @version 1.1.1
  */
 namespace Sciola;
 
@@ -20,9 +20,8 @@ class Settings
         session_start();
         define('PATH', $path);
         self::php();
-        self::sciola();
         self::constant();
-        if (SCIOLA['DEV_MODE']) {
+        if (self::dev()) {
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
         } else {
@@ -60,14 +59,14 @@ class Settings
     }
 
     /**
-     * Sciola Framework Settings.
+     * Development environment settings.
      *
      * @return void
      * @access private
      */
-    private static function sciola() : void
+    private static function dev() : bool
     {
-        define('SCIOLA', parse_ini_file(PATH . '/config/sciola.ini', true));
+        return parse_ini_file(PATH . '/config/dev.ini', true)['MODE']['debug'];
     }
 
     /**
