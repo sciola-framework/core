@@ -22,7 +22,7 @@
   <p>or</p>
   <p>debian@debian:~$ <strong>cd app/root/path</strong></p>
   <p>debian@debian:~/app/root/path$ <strong>npx sciola start ./</strong></p>
-  <p>Access the application through the configured url. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
+  <p>Access the application through the url configured in the config/<strong>dev.ini</strong> file. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
 <div align="center">
 
