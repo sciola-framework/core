@@ -18,7 +18,10 @@
 
   <hr>
   <h4>Built-in web server</h4>
-  <p>debian@debian:~$ <strong>php -S localhost:8000 -t sciola/public sciola/public/index.php</strong></p>
+  <p>debian@debian:~$ <strong>npx sciola start app/root/path</strong></p>
+  <p>or</p>
+  <p>debian@debian:~$ <strong>cd app/root/path</strong></p>
+  <p>debian@debian:~/app/root/path$ <strong>npx sciola start ./</strong></p>
   <p>Access the application through the configured url. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
 <div align="center">
