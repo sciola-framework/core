@@ -5,8 +5,8 @@
         const argv = require("minimist")(process.argv.slice(2));
         if (argv["_"][0] === "install" && !argv["_"][1]) {
             return install();
-        } else if (argv["_"][0] === "server" && !argv["_"][1]) {
-            return server();
+        } else if (argv["_"][0] === "start" && argv["_"][1]) {
+            return start(argv["_"][1]);
         }
     } catch (error) {
         console.log(error);
@@ -50,11 +50,22 @@ function install() {
     }
 }
 
-function server() {
+function start(root) {
     const fs   = require("fs");
     const ini  = require("ini");
+    const path = require("path").resolve(root);
     const exec = require("child_process").exec;
-    const dev  = ini.parse(fs.readFileSync("./config/dev.ini", "utf-8")).SERVER;
-    exec("php -S " + dev.host + ":" + dev.port + " -t public public/index.php",
-    {cwd: "./"}, (error, stdout, stderr) => console.clear());
+    const dev  = ini.parse(fs.readFileSync(path + "/config/dev.ini", "utf-8"));
+    console.clear();
+    console.log("Running server...");
+    exec("php -S " + dev["SERVER"].host + ":" + dev["SERVER"].port +
+    " -c config/php.ini -t public public/index.php", {cwd: path},
+    (error, stdout, stderr) => {
+        console.clear();
+    });
+    process.on("SIGINT", () => {
+        console.clear();
+        console.log("Server stopped");
+        process.exit();
+    });
 }
