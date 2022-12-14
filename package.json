@@ -23,6 +23,7 @@
     "bootbox.v5": "^6.0.1",
     "bootstrap": "^5.2.2",
     "decompress": "^4.2.1",
+    "ini": "^3.0.1",
     "jquery": "^3.6.1",
     "minimist": "^1.2.7"
   },
