@@ -2,7 +2,7 @@
 /**
  * Sciola
  *
- * @version 1.0.1
+ * @version 1.0.2
  */
 class Sciola
 {
@@ -30,6 +30,10 @@ class Sciola
             $file = dirname(__FILE__) . '/vendor/autoload.php';
             if (file_exists($file)) {
                 include_once $file;
+                $file = "$path/packages/vendor/autoload.php";
+                if (file_exists($file)) {
+                    include_once $file;
+                }
                 return Sciola\Settings::init($path);
             }
             throw new Exception('Error: The autoload.php file was not found!');
