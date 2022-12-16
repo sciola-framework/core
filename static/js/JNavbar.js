@@ -11,13 +11,19 @@ class JNavbar {
      * @access public
      */
     constructor() {
-        // Close Navbar when clicked outside
-        $_["document"].on("click", function (event) {
-            if ($(".navbar .navbar-toggler").attr("aria-expanded") == "true"
-                && $(event.target).closest(".navbar").length === 0) {
-                $('button[aria-expanded="true"]').click();
+        if ($(".navbar")[0]) {
+            this.navbar = Math.round($(".navbar").outerHeight(true));
+            if ($(".navbar.fixed-top")[0]) {
+                $("body").css("padding-top", this.navbar + "px");
             }
-        });
+            // Close Navbar when clicked outside
+            $_["document"].on("click", function (event) {
+                if ($(".navbar .navbar-toggler").attr("aria-expanded") == "true"
+                    && $(event.target).closest(".navbar").length === 0) {
+                    $('button[aria-expanded="true"]').click();
+                }
+            });
+        }
     }
 
     /**
@@ -34,9 +40,8 @@ class JNavbar {
             var brand       = navbar.querySelector(".navbar-brand");
             var dark_brand  = brand.querySelector(".dark-brand");
             var light_brand = brand.querySelector(".light-brand");
-            window.addEventListener("scroll", function () {
-                if (window.scrollY > 50) {
-                    navbar.classList.add("fixed-top");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > this.navbar * 2) {
                     dark_brand.classList.remove("d-none");
                     light_brand.classList.add("d-none");
                     navbar.classList.remove("navbar-dark");
@@ -44,7 +49,6 @@ class JNavbar {
                     navbar.classList.add("navbar-light");
                     navbar.classList.add("bg-white");
                 } else {
-                    navbar.classList.remove("fixed-top");
                     light_brand.classList.remove("d-none");
                     dark_brand.classList.add("d-none");
                     navbar.classList.remove("navbar-light");
