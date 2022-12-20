@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.1.1
+ * @version 1.1.2
  */
 namespace Sciola;
 
@@ -66,7 +66,7 @@ class Settings
      */
     private static function dev() : bool
     {
-        return parse_ini_file(PATH . '/config/dev.ini', true)['MODE']['debug'];
+        return parse_ini_file(PATH . '/config/dev.ini', true)['debug'];
     }
 
     /**
