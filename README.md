@@ -4,25 +4,41 @@
   <h1>Installation</h1>
   <p>There are two ways to install the Sciola Framework:</p>
   <p>This first installation method is recommended.</p>
-  <p>debian@debian:~$ <strong>npx sciola install</strong></p>
+  
+  >
+  > <p>debian@debian:~$ <strong>npx sciola install</strong></p>
+  >
+  
   <p>Or this other way:</p>
   <p>1. <a href="https://github.com/sciola-framework/sciola/archive/refs/heads/main.zip">Download the framework here and unzip it in your development directory.</a></p>
-  <p>Example: <strong>/var/www/sciola</strong></p>
+  <p>Example: <strong>/home/user</strong></p>
   <p>2. Go to the packages directory and run the following command to install:</p>
   <h4>LINUX</h4>
-  <p>debian@debian:~$ <strong>cd /var/www/sciola/packages</strong></p>
-  <p>debian@debian:/var/www/sciola/packages$ <strong>npm install sciola</strong></p>
+  
+  >
+  > <p>debian@debian:~$ <strong>cd sciola/packages</strong></p>
+  > <p>debian@debian:~/sciola/packages$ <strong>npm install sciola</strong></p>
+  >
+  
   <hr>
   
-  > **_NOTE:_** Give write permission to the directory: /var/www/sciola/**writable**
+  > **_NOTE:_** Give write permission to the directory: **writable**
 
   <hr>
   <h4>Built-in web server</h4>
-  <p>debian@debian:~$ <strong>npx sciola start app/root</strong></p>
+  
+  >
+  > <p>debian@debian:~$ <strong>npx sciola start php -d app/root</strong></p>
+  >
+  
   <p>or</p>
-  <p>debian@debian:~$ <strong>cd app/root</strong></p>
-  <p>debian@debian:~/app/root$ <strong>npx sciola start ./</strong></p>
-  <p>Access the application through the url configured in the config/<strong>dev.ini</strong> file. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
+  
+  >
+  > <p>debian@debian:~$ <strong>cd app/root</strong></p>
+  > <p>debian@debian:~/app/root$ <strong>npx sciola start php</strong></p>
+  >
+  
+  <p>Access the application through the url configured in the config/<strong>server.ini</strong> file. Example: <a href="http://localhost:8000">http://localhost:8000</a></p>
 </div>
 <div align="center">
 
