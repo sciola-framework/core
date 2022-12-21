@@ -41,7 +41,7 @@ class JNavbar {
             var dark_brand  = brand.querySelector(".dark-brand");
             var light_brand = brand.querySelector(".light-brand");
             window.addEventListener("scroll", () => {
-                if (window.scrollY > this.navbar * 2) {
+                if (window.scrollY > this.navbar) {
                     dark_brand.classList.remove("d-none");
                     light_brand.classList.add("d-none");
                     navbar.classList.remove("navbar-dark");
