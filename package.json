@@ -1,6 +1,6 @@
 {
   "name": "sciola",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The Lightweight PHP Framework to Accelerate Development.",
   "author": "Leandro Sciola <leandrosciola@gmail.com> (https://sciola-framework.github.io)",
   "license": "MIT",
@@ -42,7 +42,7 @@
     "url": "https://github.com/sciola-framework/core/issues"
   },
   "engines": {
-    "composer": "2.5.0"
+    "composer": "2.5.1"
   },
   "bin": {
     "sciola": "./bin/sciola.js"
