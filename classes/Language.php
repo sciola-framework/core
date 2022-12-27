@@ -2,7 +2,7 @@
 /**
  * Language
  *
- * @version 1.0.7
+ * @version 1.0.8
  */
 namespace Sciola;
 
@@ -20,8 +20,8 @@ class Language
      */
     public static function init() : void
     {
-        if (isset($_GET['i18n'])) {
-            $file = PATH . '/writable/cache/' . $_GET['i18n'] . '.json';
+        if (isset($_GET['lang'])) {
+            $file = PATH . '/writable/cache/' . $_GET['lang'] . '.json';
             if (file_exists($file)) {
                 header('Content-Type: application/json; charset=utf-8');
                 include_once($file);
