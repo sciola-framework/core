@@ -6,21 +6,6 @@
 class JLanguage {
 
     /**
-     * Class constructor
-     *
-     * @access public
-     */
-    constructor() {
-        var doc_lang = $_["document"].lang; // <html lang="en">
-        if (doc_lang !== "en" &&
-            sessionStorage.getItem(doc_lang) === null) {
-            $_["http"].request("/?i18n=" + doc_lang, (error, response) => {
-                sessionStorage.setItem(doc_lang, JSON.stringify(response.data));
-            });
-        }
-    }
-
-    /**
      * Return translation data via sessionStorage
      *
      * cache("language"); // cache("pt-BR");
@@ -52,9 +37,16 @@ class JLanguage {
      * @access public
      */
     change(language) {
+        if (language !== "en" && sessionStorage.getItem(language) === null) {
+            // $_GET['lang'] - /sciola/classes/Language.php
+            $_["http"].request("/?lang=" + language, (error, response) => {
+                sessionStorage.setItem(language, JSON.stringify(response.data));
+                return this.change(language);
+            });
+        }
         var url       = window.location.pathname.substring(1);
         var translate = this.cache(language);
-        // $_GET['language'] - /libraries/Settings.php
+        // $_GET['language'] - /sciola/classes/Settings.php
         $_["http"].request("/?language=" + language, (error, response) => {
             if (error) {
                 console.log(error);
