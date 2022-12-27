@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.1.2
+ * @version 1.1.3
  */
 namespace Sciola;
 
@@ -17,7 +17,6 @@ class Settings
      */
     public static function init($path) : void
     {
-        session_start();
         define('PATH', $path);
         self::php();
         self::constant();
@@ -41,10 +40,12 @@ class Settings
      */
     private static function php()
     {
+        ini_set('session.gc_probability', 1);
         $list = parse_ini_file(PATH . '/config/php.ini', true)['PHP'];
         foreach ($list as $key => $value) {
             ini_set($key, $value);
         }
+        session_start();
     }
 
     /**
