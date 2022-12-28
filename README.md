@@ -20,11 +20,11 @@
   > <p>debian@debian:~/sciola/packages$ <strong>npm install sciola</strong></p>
   >
   
-  <hr>
+  <br>
   
   > **_NOTE:_** Give write permission to the directory: **writable**
 
-  <hr>
+  <br>
   <h4>Built-in web server</h4>
   
   >
