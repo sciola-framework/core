@@ -2,7 +2,7 @@
 /**
  * Language
  *
- * @version 1.0.8
+ * @version 1.0.9
  */
 namespace Sciola;
 
@@ -80,17 +80,15 @@ class Language
     /**
      * cache
      *
-     * @param string $selected_lang
+     * @param string $file
      * @return void
      * @access private
      */
-    private static function cache($selected_lang) : void
+    private static function cache($file) : void
     {
-        $file = PATH . "/writable/cache/$selected_lang.json";
-        if (!file_exists($file) && $selected_lang !== 'en') {
-            self::generate($file);
-        } elseif ($selected_lang !== 'en') {
-            if (ini_get('display_errors')) {
+        if ($file !== 'en') {
+            $file = PATH . "/writable/cache/$file.json";
+            if (!file_exists($file) || ini_get('display_errors')) {
                 self::generate($file);
             }
             self::$language = json_decode(file_get_contents($file), true);
