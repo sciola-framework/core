@@ -6,6 +6,18 @@
 class JLanguage {
 
     /**
+     * Class constructor
+     *
+     * @access public
+     */
+    constructor() {
+        $(document).on("click", ".dropdown-language", e => {
+            e.preventDefault();
+            this.change(e.target.text.trim());
+        });
+    }
+
+    /**
      * Return translation data via sessionStorage
      *
      * cache("language"); // cache("pt-BR");
@@ -47,10 +59,8 @@ class JLanguage {
             }
             return "";
         };
-        var translation = path => {
-            return this.cache(route.language)[path] ||
-                   this.cache($_["document"].lang).getKey(path);
-        };
+        var translation = path => this.cache(route.language)[path] ||
+                                  this.cache($_["document"].lang).getKey(path);
         var arr = route.path.split("/");
         var len = arr.length;
         if (arr[1]) {
@@ -75,8 +85,10 @@ class JLanguage {
         if (language !== "en" && sessionStorage.getItem(language) === null) {
             // $_GET['lang'] - /sciola/classes/Language.php
             $_["http"].request("/?lang=" + language, (error, response) => {
+                if (error) {
+                    console.log(error);
+                }
                 sessionStorage.setItem(language, JSON.stringify(response.data));
-                return this.change(language);
             });
         }
         // $_GET['language'] - /sciola/classes/Settings.php
@@ -84,10 +96,11 @@ class JLanguage {
             if (error) {
                 console.log(error);
             }
-            window.location.href = this.translate_route({
+            window.location.href = "/";
+            /*window.location.href = this.translate_route({
               language: language,
               path: window.location.pathname.substring(1)
-            });
+            });*/
         });
     }
 }
