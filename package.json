@@ -1,6 +1,6 @@
 {
   "name": "sciola",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "The Lightweight PHP Framework to Accelerate Development.",
   "author": "Leandro Sciola <leandrosciola@gmail.com> (https://sciola-framework.github.io)",
   "license": "MIT",
@@ -19,13 +19,14 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
-    "axios": "^1.2.1",
+    "axios": "^1.2.2",
     "bootbox.v5": "^6.0.1",
     "bootstrap": "^5.2.3",
     "decompress": "^4.2.1",
     "ini": "^3.0.1",
     "jquery": "^3.6.3",
-    "minimist": "^1.2.7"
+    "minimist": "^1.2.7",
+    "portfinder": "^1.0.32"
   },
   "devDependencies": {
 
