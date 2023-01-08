@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-
+/**
+ * Class Sciola
+ *
+ * @version 1.0.0
+ */
 class Sciola {
 
     /**
@@ -38,8 +42,9 @@ class Sciola {
      * @access private
      */
     checkAppExists(path) {
-        path = this.resolve(path);
-        if (!require("fs").existsSync(path + "/packages/node_modules/sciola")) {
+        path = this.resolve(path) + "/packages/node_modules/sciola";
+        if (!require("fs").existsSync(path)) {
+            console.clear();
             console.log("Application not found.");
             return false;
         }
@@ -61,19 +66,50 @@ class Sciola {
     }
 
     /**
+     * Message box.
+     *
+     * @param {String} text
+     * @param {String} type
+     * @param {String} path
+     * @param {Function} callback
+     * @access private
+     */
+    messageBox(text, type, path, callback) {
+        path = path + "/packages/node_modules/sciola/bin";
+        this.exec("bash msgbox.sh '" + text + "' --" + type, path,
+        (error, stdout, stderr) => callback(stdout));
+    }
+
+    /**
+     * Server status. [online || offline]
+     *
+     * @param {Number} port
+     * @param {String} status
+     * @param {String} path
+     * @param {Function} callback
+     * @access private
+     */
+    serverStatus(port, status, path, callback) {
+        path = path + "/packages/node_modules/sciola/bin";
+        this.exec("bash status.sh " + port + " --" + status, path,
+        (error, stdout, stderr) => callback(stdout));
+    }
+
+    /**
      * Checks if the port is being listened to.
      *
      * @param {Number} base_port
      * @param {Function} callback
      * @access private
      */
-    portfinder(base_port, callback) {
-        const portfinder = require("portfinder");
-        portfinder.basePort = base_port;
-        portfinder.getPort((error, port) => {
-            if (error) return console.log(error);
-            return (port !== base_port) ? callback(true) : callback(false);
-        });
+    detectPort(port, callback) {
+        const detect = require("detect-port");
+        detect(port).then(_port => {
+            if (port == _port) {
+                return callback(false);
+            }
+            return callback(true);
+        }).catch(error => console.log(error));
     }
 
     /**
@@ -222,8 +258,9 @@ class Sciola {
     install(arg) {
         const callback = (error, stdout, stderr) => {
             if (error) return console.log(error);
-            console.clear();
-            console.log("Done!");
+            this.messageBox("Done!", "success",
+            (arg["plugin"] || arg["package"]).split("/packages")[0],
+            message => console.info(message));
         };
         if (arg["plugin"]) {
             const path = arg["plugin"];
@@ -267,10 +304,14 @@ class Sciola {
         const dir  = path + "/node_modules/@sciola/";
         const file = dir + name;
         if (require("fs").existsSync(file)) {
-            return console.log("The " + name + " plugin is already installed.");
+            this.messageBox("The " + name + " plugin is already installed.",
+            "danger", path.split("/packages")[0],
+            message => console.info(message));
+            return;
         }
         this.getCompressedPlugin(name, file + ".zip", () => {
-            console.log("Installing plugin...");
+            this.messageBox("Installing plugin...", "info",
+            path.split("/packages")[0], message => console.info(message));
             this.decompress(file + ".zip", dir, data => {
                 this.rename(dir + "plugin." + name + "-main", file, error => {
                     if (error) return console.log(error);
@@ -324,35 +365,43 @@ class Sciola {
         const file = path + "/config/server.ini";
         const fs   = require("fs");
         const exec = (cmd, port) => {
-            this.exec(cmd, path, (error, stdout, stderr) => {
-                if (error) return console.log(error);
-            });
-            this.portfinder(port, listening => {
-                console.clear();
-                console.log(listening ? "Running server..." : "Offline server");
-            });
-            process.on("SIGINT", () => {
-                console.clear();
-                console.log("Server stopped");
-                process.exit();
+            this.detectPort(port, busy => {
+                if (!busy) {
+                    this.exec(cmd, path, () => null);
+                    this.serverStatus(port, "online", path,
+                    message => console.info(message));
+                    process.on("SIGINT", () => {
+                        this.serverStatus(port, "offline", path, message => {
+                            console.info(message);
+                            process.exit();
+                        });
+                    });
+                } else {
+                    this.messageBox("Port " + port + " is busy", "danger", path,
+                    message => console.info(message));
+                }
             });
         };
         if (fs.existsSync(file)) {
             const config = require("ini").parse(fs.readFileSync(file, "utf-8"));
             switch (interpreter) {
               case "php":
-                exec("php -S " + config["PHP"].host + ":" + config["PHP"].port +
+                exec("php -q -S " +
+                     config["PHP"].host + ":" + config["PHP"].port +
                      " -c config/php.ini -t public public/index.php",
                      config["PHP"].port);
                 break;
               case "node":
-                console.log("Features to be implemented in the future.");
+                this.messageBox("Features to be implemented in the future.",
+                "info", path, message => console.info(message));
                 break;
               default:
-                console.log("Invalid interpreter.");
+                this.messageBox("Invalid interpreter.", "danger", path,
+                message => console.info(message));
             }
         } else {
-            console.log("server.ini file not found.");
+            this.messageBox("server.ini file not found.", "danger", path,
+            message => console.info(message));
         }
     }
 }
@@ -361,6 +410,6 @@ class Sciola {
     try {
         const sciola = new Sciola();
     } catch (error) {
-        console.log(error);
+        return console.log(error);
     }
 })();
