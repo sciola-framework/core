@@ -2,7 +2,7 @@
 /**
  * Class Sciola
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 class Sciola {
 
@@ -26,6 +26,28 @@ class Sciola {
     }
 
     /**
+     * Define PATH.
+     *
+     * @param {String} path
+     * @access private
+     */
+    define(path) {
+        global.PATH = [];
+        const fs    = require("fs");
+        const ini   = require("ini");
+        const file  = path + "/config/path.ini";
+        if (!fs.existsSync(file)) {
+            console.clear();
+            return console.log("Application not found.");
+        }
+        const conf = ini.parse(fs.readFileSync(file, "utf-8"));
+        for (let key in conf) {
+            PATH[key] = path + conf[key];
+        }
+        PATH["app"] = path;
+    }
+
+    /**
      * Resolve path.
      *
      * @param {String} path
@@ -38,12 +60,11 @@ class Sciola {
     /**
      * Check if the app exists.
      *
-     * @param {String} path
      * @access private
      */
-    checkAppExists(path) {
-        path = this.resolve(path) + "/packages/node_modules/sciola";
-        if (!require("fs").existsSync(path)) {
+    checkAppExists() {
+        const fs = require("fs");
+        if (!fs.existsSync(PATH["node_modules"] + "/sciola")) {
             console.clear();
             console.log("Application not found.");
             return false;
@@ -59,9 +80,9 @@ class Sciola {
      * @param {Function} callback
      * @access private
      */
-    exec(cmd, path = "./", callback) {
+    exec(cmd, path, callback) {
         require("child_process").exec(cmd, {
-          cwd: this.resolve(path)
+          cwd: path
         }, (error, stdout, stderr) => callback(error, stdout, stderr));
     }
 
@@ -70,14 +91,13 @@ class Sciola {
      *
      * @param {String} text
      * @param {String} type
-     * @param {String} path
      * @param {Function} callback
      * @access private
      */
-    messageBox(text, type, path, callback) {
-        path = path + "/packages/node_modules/sciola/bin";
-        this.exec("bash msgbox.sh '" + text + "' --" + type, path,
-        (error, stdout, stderr) => callback(stdout));
+    messageBox(text, type, callback) {
+        this.exec("bash msgbox.sh '" + text + "' --" + type,
+                  PATH["node_modules"] + "/sciola/bin",
+                  (error, stdout, stderr) => callback(stdout));
     }
 
     /**
@@ -85,14 +105,13 @@ class Sciola {
      *
      * @param {Number} port
      * @param {String} status
-     * @param {String} path
      * @param {Function} callback
      * @access private
      */
-    serverStatus(port, status, path, callback) {
-        path = path + "/packages/node_modules/sciola/bin";
-        this.exec("bash status.sh " + port + " --" + status, path,
-        (error, stdout, stderr) => callback(stdout));
+    serverStatus(port, status, callback) {
+        this.exec("bash status.sh " + port + " --" + status,
+                  PATH["node_modules"] + "/sciola/bin",
+                  (error, stdout, stderr) => callback(stdout));
     }
 
     /**
@@ -116,13 +135,13 @@ class Sciola {
      * Unzip the .zip file.
      *
      * @param {String} file
-     * @param {String} path
+     * @param {String} output
      * @param {Function} callback
      * @access private
      */
-    decompress(file, path, callback) {
+    decompress(file, output, callback) {
         const decompress = require("decompress");
-        decompress(file, path).then(data => {
+        decompress(file, output).then(data => {
             require("fs").unlinkSync(file);
             return callback(data);
         });
@@ -152,7 +171,8 @@ class Sciola {
     getCompressedPlugin(name, file, callback) {
         this.getPluginURL(name, (error, url) => {
             if (error) return console.log(error);
-            if (!url) return console.log("Plugin not found.");
+            if (!url) return this.messageBox("Plugin not found.", "danger",
+                                              message => console.info(message));
             file = require("fs").createWriteStream(file);
             require("https").get(url, response => {
                 response.pipe(file);
@@ -259,19 +279,16 @@ class Sciola {
         const callback = (error, stdout, stderr) => {
             if (error) return console.log(error);
             this.messageBox("Done!", "success",
-            (arg["plugin"] || arg["package"]).split("/packages")[0],
-            message => console.info(message));
+                            message => console.info(message));
         };
         if (arg["plugin"]) {
-            const path = arg["plugin"];
-            this.exec("npm install", path, (error, stdout, stderr) => {
+            this.exec("npm install", arg["plugin"], (error, stdout, stderr) => {
                 if (error) return console.log(error);
-                this.exec("node " + path.split("/plugins")[0] +
-                "/bin/composer.js install", path, callback);
+                this.exec("node " + PATH["node_modules"] + "/sciola/bin/" +
+                          "composer.js install", arg["plugin"], callback);
             });
         } else if (arg["package"]) {
-            const path = arg["package"];
-            this.exec("npm install sciola", path, callback);
+            this.exec("npm install sciola", arg["package"], callback);
         } else {
             arg["_"][1] ?
             this.installPlugin(arg["_"][1], arg["d"]) :
@@ -299,19 +316,19 @@ class Sciola {
      */
     installPlugin(name, path = "./") {
         console.clear();
-        if (!this.checkAppExists(path)) return;
-        path = this.resolve(path) + "/packages/node_modules/sciola/plugins";
+        this.define(this.resolve(path));
+        if (!this.checkAppExists()) return;
+        path = PATH["node_modules"] + "/sciola/plugins";
         const dir  = path + "/node_modules/@sciola/";
         const file = dir + name;
         if (require("fs").existsSync(file)) {
             this.messageBox("The " + name + " plugin is already installed.",
-            "danger", path.split("/packages")[0],
-            message => console.info(message));
+            "danger", message => console.info(message));
             return;
         }
         this.getCompressedPlugin(name, file + ".zip", () => {
             this.messageBox("Installing plugin...", "info",
-            path.split("/packages")[0], message => console.info(message));
+                            message => console.info(message));
             this.decompress(file + ".zip", dir, data => {
                 this.rename(dir + "plugin." + name + "-main", file, error => {
                     if (error) return console.log(error);
@@ -333,19 +350,18 @@ class Sciola {
      */
     installPackage() {
         console.clear();
-        const path = this.resolve("./");
-        const dir  = path + "/sciola";
-        const file = path + "/sciola.zip";
-        if (require("fs").existsSync(path + "/sciola")) {
+        this.define(this.resolve("./") + "/sciola");
+        if (require("fs").existsSync(PATH["app"])) {
             return console.log("A folder with that name already exists.");
         }
         console.log("Installing packages...");
+        const file = PATH["app"] + ".zip";
         this.getCompressedFile(file, () => {
-            this.decompress(file, path, data => {
-                this.rename(dir + "-main", dir, error => {
+            this.decompress(file, this.resolve("./"), data => {
+                this.rename(PATH["app"] + "-main", PATH["app"], error => {
                     if (error) return console.log(error);
                     this.install({
-                      "package": dir + "/packages"
+                      "package": PATH["node_modules"].split("/node_modules")[0]
                     });
                 });
             });
@@ -360,24 +376,24 @@ class Sciola {
      * @access private
      */
     server(interpreter, path = "./") {
-        path = this.resolve(path);
-        if (!this.checkAppExists(path)) return;
-        const file = path + "/config/server.ini";
+        this.define(this.resolve(path));
+        if (!this.checkAppExists()) return;
+        const file = PATH["app"] + "/config/server.ini";
         const fs   = require("fs");
         const exec = (cmd, port) => {
             this.detectPort(port, busy => {
                 if (!busy) {
-                    this.exec(cmd, path, () => null);
-                    this.serverStatus(port, "online", path,
+                    this.exec(cmd, PATH["app"], () => null);
+                    this.serverStatus(port, "online",
                     message => console.info(message));
                     process.on("SIGINT", () => {
-                        this.serverStatus(port, "offline", path, message => {
+                        this.serverStatus(port, "offline", message => {
                             console.info(message);
                             process.exit();
                         });
                     });
                 } else {
-                    this.messageBox("Port " + port + " is busy", "danger", path,
+                    this.messageBox("Port " + port + " is busy", "danger",
                     message => console.info(message));
                 }
             });
@@ -388,19 +404,20 @@ class Sciola {
               case "php":
                 exec("php -q -S " +
                      config["PHP"].host + ":" + config["PHP"].port +
-                     " -c config/php.ini -t public public/index.php",
+                     " -c " + PATH["app"] + "/config/php.ini -t " +
+                     PATH["public"] + " " + PATH["public"] + "/index.php",
                      config["PHP"].port);
                 break;
               case "node":
                 this.messageBox("Features to be implemented in the future.",
-                "info", path, message => console.info(message));
+                "info", message => console.info(message));
                 break;
               default:
-                this.messageBox("Invalid interpreter.", "danger", path,
+                this.messageBox("Invalid interpreter.", "danger",
                 message => console.info(message));
             }
         } else {
-            this.messageBox("server.ini file not found.", "danger", path,
+            this.messageBox("server.ini file not found.", "danger",
             message => console.info(message));
         }
     }
