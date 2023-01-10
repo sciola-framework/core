@@ -2,7 +2,7 @@
 /**
  * Template
  *
- * @version 1.0.9
+ * @version 1.1.0
  */
 namespace Sciola;
 
@@ -27,8 +27,8 @@ class Template
         $TwigLoader = new Twig\Loader\FilesystemLoader(PATH['views']);
         $TwigLoader->addPath(PATH['node_modules'], 'packages');
         self::$Twig = new Twig\Environment($TwigLoader, $twig_env);
-        require_once(PATH['node_modules'] . '/sciola/twig_filters.php');
-        require_once(PATH['node_modules'] . '/sciola/twig_functions.php');
+        require_once(PATH['core'] . '/twig_filters.php');
+        require_once(PATH['core'] . '/twig_functions.php');
     }
 
     /**
