@@ -41,7 +41,7 @@ function ($text, $bgcolor, $btnclose = false, $css = '') {
 | ------------------------------------------------------------------------------
 */
 Sciola\Template::twigFunction('language_list', function () {
-    $language = array_filter(glob(PATH . '/languages/*'), 'is_dir');
+    $language = array_filter(glob(PATH['app'] . '/languages/*'), 'is_dir');
     foreach ($language as $index => $value) {
         $arr = explode('/', $value);
         $language[$index] = end($arr);
@@ -56,7 +56,7 @@ Sciola\Template::twigFunction('language_list', function () {
 | ------------------------------------------------------------------------------
 */
 Sciola\Template::twigFunction('parsedown', function ($file) {
-    $contents  = file_get_contents(PATH . $file);
+    $contents  = file_get_contents(PATH['app'] . $file);
     $Parsedown = new Parsedown();
     return $Parsedown->text($contents);
 });
