@@ -2,7 +2,7 @@
 /**
  * Route
  *
- * @version 1.0.9
+ * @version 1.1.0
  */
 namespace Sciola;
 
@@ -58,16 +58,16 @@ class Route
      */
     private static function includeRoutes()
     {
-	    $routes = PATH . '/routes/*.php';
+	    $routes = PATH['routes'] . '/*.php';
         foreach (glob($routes) as $file) {
             include_once $file;
         }
-        self::reserved(PATH . '/packages/node_modules/sciola/package.json');
-        self::reserved(PATH . '/packages/package.json');
+        self::reserved(PATH['node_modules'] . '/sciola/package.json');
+        self::reserved(substr(PATH['node_modules'], 0, -13) . '/package.json');
     }
 
     /**
-     * Reserved routes
+     * Reserved routes.
      *
      * @access private
      */
@@ -77,7 +77,7 @@ class Route
         $package_json = json_decode($package_json, true);
         foreach ($package_json['public'] as $alias => $dir) {
             self::add("/packages/$alias/(.*)", function ($file) use ($dir) {
-                File::getStaticFile(PATH . "/packages/node_modules/$dir/$file");
+                File::getStaticFile(PATH['node_modules'] . "/$dir/$file");
             });
         }
     }
