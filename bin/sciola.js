@@ -2,7 +2,7 @@
 /**
  * Class Sciola
  *
- * @version 1.0.2
+ * @version 1.0.3
  */
 class Sciola {
 
@@ -38,7 +38,7 @@ class Sciola {
         const file  = path + "/config/path.ini";
         if (!fs.existsSync(file)) {
             console.clear();
-            return console.log("Application not found.");
+            return console.log("Application not found. xxxxxxxxxxxxxxxxxxxxxx");
         }
         const conf = ini.parse(fs.readFileSync(file, "utf-8"));
         for (let key in conf) {
@@ -353,8 +353,11 @@ class Sciola {
         global.PATH          = [];
         PATH["app"]          = this.resolve("./") + "/sciola";
         PATH["node_modules"] = PATH["app"] + "/packages/node_modules";
-        if (require("fs").existsSync(PATH["app"])) {
-            return console.log("A folder with that name already exists.");
+        if (require("fs").existsSync(PATH["node_modules"])) {
+            this.messageBox("There is already an installation of Sciola " +
+                            "Framework in this directory.", "danger",
+                            message => console.info(message));
+            return;
         }
         console.log("Installing packages...");
         const file = PATH["app"] + ".zip";
