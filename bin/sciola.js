@@ -2,7 +2,7 @@
 /**
  * Class Sciola
  *
- * @version 1.0.1
+ * @version 1.0.2
  */
 class Sciola {
 
@@ -350,7 +350,9 @@ class Sciola {
      */
     installPackage() {
         console.clear();
-        this.define(this.resolve("./") + "/sciola");
+        global.PATH          = [];
+        PATH["app"]          = this.resolve("./") + "/sciola";
+        PATH["node_modules"] = PATH["app"] + "/packages/node_modules";
         if (require("fs").existsSync(PATH["app"])) {
             return console.log("A folder with that name already exists.");
         }
@@ -361,7 +363,7 @@ class Sciola {
                 this.rename(PATH["app"] + "-main", PATH["app"], error => {
                     if (error) return console.log(error);
                     this.install({
-                      "package": PATH["node_modules"].split("/node_modules")[0]
+                      "package": PATH["app"] + "/packages"
                     });
                 });
             });
@@ -422,7 +424,6 @@ class Sciola {
         }
     }
 }
-
 (function () {
     try {
         const sciola = new Sciola();
