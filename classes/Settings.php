@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.1.5
+ * @version 1.1.6
  */
 namespace Sciola;
 
@@ -11,13 +11,11 @@ class Settings
     /**
      * init
      *
-     * @param string $path
      * @return void
      * @access public
      */
-    public static function init($app) : void
+    public static function init() : void
     {
-        self::definePath($app);
         self::php();
         self::autoloader();
         self::constant();
@@ -32,23 +30,6 @@ class Settings
         Language::init();
         Template::init();
         Route::init();
-    }
-
-    /**
-     * Define path.
-     *
-     * @param string $app
-     * @return void
-     * @access private
-     */
-    private static function definePath($app) : void
-    {
-        $path = parse_ini_file("$app/config/path.ini", true);
-        foreach ($path as $key => $value) {
-            $path[$key] = $app . $path[$key];
-        }
-        $path["app"] = $app;
-        define('PATH', $path);
     }
 
     /**
