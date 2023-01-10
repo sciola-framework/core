@@ -2,7 +2,7 @@
 /**
  * Template
  *
- * @version 1.0.8
+ * @version 1.0.9
  */
 namespace Sciola;
 
@@ -22,13 +22,13 @@ class Template
         if (ini_get('display_errors')) {
             $twig_env = ['auto_reload' => true, 'cache' => false];
         } else {
-            $twig_env = ['cache' => PATH . '/writable/cache'];
+            $twig_env = ['cache' => PATH['cache']];
         }
-        $TwigLoader = new Twig\Loader\FilesystemLoader(PATH . '/layers/Views');
-        $TwigLoader->addPath(PATH . '/packages/node_modules', 'packages');
+        $TwigLoader = new Twig\Loader\FilesystemLoader(PATH['views']);
+        $TwigLoader->addPath(PATH['node_modules'], 'packages');
         self::$Twig = new Twig\Environment($TwigLoader, $twig_env);
-        require_once(PATH . '/packages/node_modules/sciola/twig_filters.php');
-        require_once(PATH . '/packages/node_modules/sciola/twig_functions.php');
+        require_once(PATH['node_modules'] . '/sciola/twig_filters.php');
+        require_once(PATH['node_modules'] . '/sciola/twig_functions.php');
     }
 
     /**
