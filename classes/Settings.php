@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @version 1.1.4
+ * @version 1.1.5
  */
 namespace Sciola;
 
@@ -65,11 +65,11 @@ class Settings
         $Psr4AutoloaderClass = new Psr4AutoloaderClass;
         $Psr4AutoloaderClass->register();
         $Psr4AutoloaderClass->addNamespace(NS['controller'],
-                                           PATH['app'] . PATH['controllers']);
+                                           PATH['controllers']);
         $Psr4AutoloaderClass->addNamespace(NS['model'],
-                                           PATH['app'] . PATH['models']);
+                                           PATH['models']);
         $Psr4AutoloaderClass->addNamespace(NS['libraries'],
-                                           PATH['app'] . PATH['libraries']);
+                                           PATH['libraries']);
     }
 
     /**
