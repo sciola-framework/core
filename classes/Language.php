@@ -2,7 +2,7 @@
 /**
  * Language
  *
- * @version 1.0.9
+ * @version 1.1.0
  */
 namespace Sciola;
 
@@ -21,7 +21,7 @@ class Language
     public static function init() : void
     {
         if (isset($_GET['lang'])) {
-            $file = PATH . '/writable/cache/' . $_GET['lang'] . '.json';
+            $file = PATH['cache'] . '/' . $_GET['lang'] . '.json';
             if (file_exists($file)) {
                 header('Content-Type: application/json; charset=utf-8');
                 include_once($file);
@@ -42,11 +42,11 @@ class Language
     {
         $arr['en']   = [];
         $arr['lang'] = [];
-        $dir         = $path . '/languages/en/*.json';
+        $dir         = $path . '/en/*.json';
         foreach (glob($dir) as $file) {
             $arr['en'] += json_decode(file_get_contents($file), true);
         }
-        $dir = $path . '/languages/' . Settings::language() . '/*.json';
+        $dir = $path . '/' . Settings::language() . '/*.json';
         foreach (glob($dir) as $file) {
             $arr['lang'] += json_decode(file_get_contents($file), true);
         }
@@ -64,8 +64,8 @@ class Language
     {
         $data        = [];
         $arr         = [];
-        $arr_sys     = self::getContent(dirname(__DIR__));
-        $arr_app     = self::getContent(PATH);
+        $arr_sys     = self::getContent(dirname(__DIR__) . '/languages');
+        $arr_app     = self::getContent(PATH['languages']);
         $arr['en']   = array_merge($arr_sys['en'], $arr_app['en']);
         $arr['lang'] = array_merge($arr_sys['lang'], $arr_app['lang']);
 
@@ -87,7 +87,7 @@ class Language
     private static function cache($file) : void
     {
         if ($file !== 'en') {
-            $file = PATH . "/writable/cache/$file.json";
+            $file = PATH['cache'] . "/$file.json";
             if (!file_exists($file) || ini_get('display_errors')) {
                 self::generate($file);
             }
