@@ -2,7 +2,7 @@
 /**
  * Route
  *
- * @version 1.1.0
+ * @version 1.1.1
  */
 namespace Sciola;
 
@@ -62,7 +62,7 @@ class Route
         foreach (glob($routes) as $file) {
             include_once $file;
         }
-        self::reserved(PATH['node_modules'] . '/sciola/package.json');
+        self::reserved(PATH['core'] . '/package.json');
         self::reserved(substr(PATH['node_modules'], 0, -13) . '/package.json');
     }
 
