@@ -38,7 +38,7 @@ class Sciola {
         const file  = path + "/config/path.ini";
         if (!fs.existsSync(file)) {
             console.clear();
-            return console.log("Application not found. xxxxxxxxxxxxxxxxxxxxxx");
+            return console.log("path.ini file not found.");
         }
         const conf = ini.parse(fs.readFileSync(file, "utf-8"));
         for (let key in conf) {
