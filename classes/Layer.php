@@ -2,7 +2,7 @@
 /**
  * Layer
  *
- * @version 1.0.2
+ * @version 1.0.3
  */
 namespace Sciola;
 
@@ -31,7 +31,7 @@ class Layer
      */
     public static function controller($_class) : object
     {
-        return self::instance('Layers\Controllers', $_class);
+        return self::instance(NS['controller'], $_class);
     }
 
     /**
@@ -43,7 +43,7 @@ class Layer
      */
     public static function model($_class) : object
     {
-        return self::instance('Layers\Models', $_class);
+        return self::instance(NS['model'], $_class);
     }
 
     /**
