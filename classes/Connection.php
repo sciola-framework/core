@@ -2,7 +2,7 @@
 /**
  * Connection
  *
- * @version 1.0.2
+ * @version 1.0.3
  */
 namespace Sciola;
 
@@ -30,8 +30,7 @@ class Connection
                     'ini</strong>');
                 }
                 if (strtolower($config['driver']) === 'sqlite') {
-                    self::$instance = new PDO('sqlite:' . PATH .
-                                              '/writable/sqlite/' .
+                    self::$instance = new PDO('sqlite:' . PATH['sqlite'] . '/' .
                                               $config['database'] . '.db');
                 } else {
                     self::$instance = new PDO($config['dsn'],
@@ -62,7 +61,7 @@ class Connection
      */
     private static function config($interface) : array
     {
-        $config = parse_ini_file(PATH . '/config/connection.ini', true);
+        $config = parse_ini_file(PATH['app'] . '/config/connection.ini', true);
 
         if ($interface === 'pdo' &&
             strtolower($config['driver']) !== 'sqlite') {
@@ -85,7 +84,7 @@ class Connection
             if (strtolower($config['driver']) === 'sqlite') {
                 $config = [
                   'type'     => 'sqlite',
-                  'database' => PATH . '/writable/sqlite/' . $config['database']
+                  'database' => PATH['sqlite'] . '/' . $config['database']
                 ];
             } else {
                 $config = [
