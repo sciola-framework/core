@@ -2,7 +2,7 @@
 /**
  * Language
  *
- * @version 1.1.0
+ * @version 1.1.1
  */
 namespace Sciola;
 
@@ -64,7 +64,7 @@ class Language
     {
         $data        = [];
         $arr         = [];
-        $arr_sys     = self::getContent(dirname(__DIR__) . '/languages');
+        $arr_sys     = self::getContent(PATH['core'] . '/languages');
         $arr_app     = self::getContent(PATH['languages']);
         $arr['en']   = array_merge($arr_sys['en'], $arr_app['en']);
         $arr['lang'] = array_merge($arr_sys['lang'], $arr_app['lang']);
