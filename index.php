@@ -2,7 +2,7 @@
 /**
  * Sciola
  *
- * @version 1.0.4
+ * @version 1.0.5
  */
 class Sciola
 {
@@ -10,20 +10,17 @@ class Sciola
      * index
      *
      * @param string $app
+     * @param array $path
      * @access public
      */
-    public static function index($app)
+    public static function index($app, $path)
     {
-        $path = parse_ini_file("$app/config/path.ini", true);
         foreach ($path as $key => $value) {
             $path[$key] = $app . $path[$key];
         }
         $path["app"]  = $app;
         $path["core"] = dirname(__FILE__);
         define('PATH', $path);
-        if (is_file(PATH['public'] . $_SERVER['REQUEST_URI'])) {
-            return false;
-        }
         self::autoload();
     }
 
